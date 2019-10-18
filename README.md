@@ -1,1 +1,1 @@
-# restserviceconfig
+# Weather service configs
