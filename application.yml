@@ -1,0 +1,81 @@
+
+server:
+  port: 8080
+
+weather:
+  api:
+    key: f0fe4ea8a1902230011df36c104afe2f
+    base:
+      url: http://api.openweathermap.org/data/2.5/weather
+    units: metric
+    timeout: 30000
+    private:
+      key: MIIEpAIBAAKCAQEAx/X5zBvQTaOkCZP8Sdcjout4FxUzSrQa76/k9JTYgGRW1k9wxvVKnb5odT0Y/NaXR21Ct9LupcyQ3Y3h5wkTItLnlSg2mEkmQLs4ReIobrloCZpLwHrYSYq1m8sNqDJ3rw+58lHvJvBTPVAoWKzgzp4ntlYrSnd+oZbVZH3HtsmLOXXc/VxAdxX3RObCFh6agofMt7ehVyjtR9bS09rcQSsIDPXq9+Yw3Ld1W8MAdpijvtKZ6CM4CGANmqcQzx6TknXTKKwpEuaVe1vHGqzGgCwUq2VsymTvXv5NbTiUzdPU0xd89wRl0h2ACVlNe2l86UvAXtkdhpahEXWDJ92/6QIDAQABAoIBADZlL4LavhugvGrumt7ra4JSU+TTm5Ri0kEJtFrkctDaetTp32AAMkAfIANkj3uYVKbVjiS7eLgZof7jLeTPjykV/nGQ8ukSXRmW1IQONbmJLkgOdTTzNgsrdKPg5OIweGZi/M5yg4AwODShrZgRz0XluB/d6QDk6MnEYmBn5wBN8DCNB1OHpF6M4KcDyUcLBZQWLH/44ePSFfgp26xPP6hh/9Yip9bATreJwSxkMwLJQADZErgaVWmsF0aca/NhkoF78HFxxtDlsbqQgofvDDe/NfK3dwQY/JJt4N9zEXZBVdx5obxgu24uLo6d58trYEiSu0oGazpayxUVgw4WE5ECgYEA6Li6Pg7ewPXEPvyRU0cfBfZh+NRVvjmYqE1uw9rmdWAaA5ZuAMhedxT6I11/ePm3XeBoW4BUtVgwDoWeoYfqjRFFqUSTCBb6Z6L8lFKco06EIgDOsmey9Ub7mjZSDs0BnAimW1nApEKOURLu9dBNXG/Z0quZ90D+33Kg8GkpSmMCgYEA2/ZZDzbgaETRwpDBpC9f5PkcV4/nziP/NqTTpEeLhWJHEC2qASP7q+Hso4YkSq0CUSdnJfpB/vvBA1nnt0Ad08z4iUZ1BoY5rqyhLbh5iJbBMjjmMm/KfkQz0cCUX9h1sB7TQroe043tiwYW2c2kUOUnqdr4FL4CvgDs7MFyGEMCgYAA86BvWIg4qcifqVC+0m+iCpvj9JpVKM8jAQ4O5vpCSJ5SnW7dufQI8KEFPAClcf/59kz28tNl2nJ33LwFVRT0drmeM5WWVuG3Qsddo+jYEh4gNXii6iGlNyEYRFiZjuUOykpD3V4YTd1fH4CyqKNoWVy+q8z5Yd6o80MNOKDemQKBgQC+MR1CrYWOQutIm9gDuj7lgoyCHdkmgjObsRua8Y3vMFIX6BQWVmG3dmsh3cwlkcDuIO7shJ5p9o8m8acM6XChAZtpPzXTBV587aGUIe1cMFYuscpBlC33zcsss6LX2RexyIWNLdeXvyHFUueRPmG03N/V25MkhENkvPIfqQiZdwKBgQDF2cnkrZwavbJpII7PdlnNVZhJZ0rShWaR6S5OP33+hlHt3eD/bU4O69HGWJ3oIPtCOKZKz8wHV1rpz3mmhC9DTgD3+GymUHpe2msO73BB3aQtxXIEwL+vx9dcG3mpV9Q6TaOB8qlpsg7S/di6VOv/LRcDc2wg0n+HzxuiJnUZZw==
+    public:
+      key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx/X5zBvQTaOkCZP8Sdcjout4FxUzSrQa76/k9JTYgGRW1k9wxvVKnb5odT0Y/NaXR21Ct9LupcyQ3Y3h5wkTItLnlSg2mEkmQLs4ReIobrloCZpLwHrYSYq1m8sNqDJ3rw+58lHvJvBTPVAoWKzgzp4ntlYrSnd+oZbVZH3HtsmLOXXc/VxAdxX3RObCFh6agofMt7ehVyjtR9bS09rcQSsIDPXq9+Yw3Ld1W8MAdpijvtKZ6CM4CGANmqcQzx6TknXTKKwpEuaVe1vHGqzGgCwUq2VsymTvXv5NbTiUzdPU0xd89wRl0h2ACVlNe2l86UvAXtkdhpahEXWDJ92/6QIDAQAB
+
+feign:
+  hystrix:
+    enabled: true
+
+file:
+  download:
+    url: http://bulk.openweathermap.org/sample/city.list.json.gz
+    path: /tmp/
+    gz:
+      name: city.list.json.gz
+    name: city.list.json
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+
+
+spring:
+  profiles:
+#    Change this profile to switch between h2 or postgres sql
+    active: h2
+  application:
+    name: weather
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  jpa:
+    database: h2
+    database-platform:  org.hibernate.dialect.H2Dialect
+
+  datasource:
+    url: jdbc:h2:file:~/Weather;DB_CLOSE_DELAY=-1;
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    platform: h2
+    schema: classpath:/schema-h2.sql
+
+---
+spring:
+  profiles:
+    active: postgresql
+  application:
+    name: weather
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: pgresuser
+    password: password
+    driverClassName: org.postgresql.Driver
+    initialization-mode: always
+    schema: classpath:schema-postgresql.sql
