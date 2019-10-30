@@ -1,4 +1,8 @@
 
+spring:
+  profiles:
+    active: h2
+
 server:
   port: 8080
 
@@ -34,11 +38,9 @@ hystrix:
           thread:
             timeoutInMilliseconds: 4000
 
-
+---
 spring:
-  profiles:
-#    Change this profile to switch between h2 or postgres sql
-    active: h2
+  profiles: h2
   application:
     name: weather
   h2:
@@ -59,8 +61,7 @@ spring:
 
 ---
 spring:
-  profiles:
-    active: postgresql
+  profiles: postgresql
   application:
     name: weather
   jpa:
